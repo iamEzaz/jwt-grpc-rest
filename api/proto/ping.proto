@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package ping;
+
+option go_package = "jwt-grpc-rest/api/proto";
+
+service Service {
+    rpc Login(req) returns(res){}
+    rpc Home(req) returns(res){}
+}
+
+message req {
+    int32 id = 1;
+    string nickname = 2;
+    string email = 3;
+    string password =4;
+    string title=5;
+    string content=6;
+    int32 author_id=7;
+    int32 created_at=8;
+    int32 updated_at=9;
+
+}
+
+message res {
+    int32 id = 10;
+    string nickname = 11;
+    string email = 12;
+    string password =13;
+    string title=14;
+    string content=15;
+    int32 author_id=16;
+    int32 created_at=17;
+    int32 updated_at=18;
+}
