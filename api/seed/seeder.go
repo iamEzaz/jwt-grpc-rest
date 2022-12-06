@@ -4,18 +4,18 @@ import (
 	"log"
 
 	"github.com/jinzhu/gorm"
-	"jwt-grpc-rest/api/models"
+	"github.com/iamEzaz/jwt-grpc-rest/api/models"
 )
 
 var users = []models.User{
 	models.User{
-		Nickname: "Steven victor",
-		Email:    "steven@gmail.com",
+		Nickname: "Ezazul",
+		Email:    "ezaz@gmail.com",
 		Password: "password",
 	},
 	models.User{
-		Nickname: "Martin Luther",
-		Email:    "luther@gmail.com",
+		Nickname: "Rafin ",
+		Email:    "rafin@gmail.com",
 		Password: "password",
 	},
 }
@@ -23,11 +23,11 @@ var users = []models.User{
 var posts = []models.Post{
 	models.Post{
 		Title:   "Title 1",
-		Content: "Hello world 1",
+		Content: "boring world 1",
 	},
 	models.Post{
 		Title:   "Title 2",
-		Content: "Hello world 2",
+		Content: "boring world 2",
 	},
 }
 

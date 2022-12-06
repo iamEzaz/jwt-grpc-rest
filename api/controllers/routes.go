@@ -1,11 +1,11 @@
 package controllers
 
-import "jwt-grpc-rest/api/middlewares"
+import "github.com/iamEzaz/jwt-grpc-rest/api/middlewares"
 
 func (s *Server) initializeRoutes() {
 
 	// Home Route
-	s.Router.HandleFunc("/", middlewares.SetMiddlewareJSON(s.Home)).Methods("GET")
+	s.Router.HandleFunc("/home", middlewares.SetMiddlewareJSON(s.Home)).Methods("GET")
 
 	// Login Route
 	s.Router.HandleFunc("/login", middlewares.SetMiddlewareJSON(s.Login)).Methods("POST")

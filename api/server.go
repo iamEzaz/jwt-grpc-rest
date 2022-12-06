@@ -3,18 +3,12 @@ package main
 import (
 	"fmt"
 	"log"
-	"net/http"
 	"os"
-	"context"
 
-	"jwt-grpc-rest/api/controllers"
-	"jwt-grpc-rest/api/proto"
-	"jwt-grpc-rest/api/seed"
-
-	"github.com/gorilla/mux"
+	"github.com/iamEzaz/jwt-grpc-rest/api/controllers"
+	"github.com/iamEzaz/jwt-grpc-rest/api/seed"
 	"github.com/joho/godotenv"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
+	
 )
 
 var server = controllers.Server{}
@@ -27,23 +21,6 @@ func init() {
 }
 
 func main() {
-
-	router := mux.NewRouter()
-	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request){
-		dialOption := grpc.WithTransportCredentials(insecure.NewCredentials())
-		serviceConnection, err := grpc.Dial("localhost:3005", dialOption)
-		if err != nil{
-			panic(err)
-		}
-
-		serviceClient := proto.NewServiceClient(serviceConnection)
-
-		res, err :=serviceClient.Login(context.Background(), &proto.Req{Email: "ezaz@gmail.com", Password: "ezaz@1234"})
-		if err !=nil{
-			panic(err)
-		}
-		fmt.Fprint(w, res.Email, res.Password)
-	})
 
 	var err error
 	err = godotenv.Load()
@@ -58,12 +35,5 @@ func main() {
 	seed.Load(server.DB)
 
 	server.Run(":8080")
-	
-	fmt.Println("http running on 8080")
-	if err := http.ListenAndServe(":8080", router); err != nil{
-		panic(err)
-	}
-
-	
 
 }

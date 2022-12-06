@@ -7,15 +7,34 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strconv"
+	"context"
 
 	"github.com/gorilla/mux"
-	"jwt-grpc-rest/api/auth"
-	"jwt-grpc-rest/api/models"
-	"jwt-grpc-rest/api/responses"
-	"jwt-grpc-rest/api/utils/formaterror"
+	"github.com/iamEzaz/jwt-grpc-rest/api/auth"
+	"github.com/iamEzaz/jwt-grpc-rest/api/models"
+	"github.com/iamEzaz/jwt-grpc-rest/api/responses"
+	"github.com/iamEzaz/jwt-grpc-rest/api/utils/formaterror"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
+	"github.com/iamEzaz/jwt-grpc-rest/api/proto"
 )
 
 func (server *Server) CreatePost(w http.ResponseWriter, r *http.Request) {
+
+
+	dialOption := grpc.WithTransportCredentials(insecure.NewCredentials())
+		serviceConnection, err := grpc.Dial("localhost:3005", dialOption)
+		if err != nil{
+			panic(err)
+		}
+
+		serviceClient := proto.NewServiceClient(serviceConnection)
+
+		res, err :=serviceClient.Home(context.Background(), &proto.Req{Email: "ezaz@gmail.com", Password: "ezaz@1234"})
+		if err !=nil{
+			panic(err)
+		}
+		fmt.Fprint(w, res.Email, res.Password)
 
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -55,6 +74,21 @@ func (server *Server) CreatePost(w http.ResponseWriter, r *http.Request) {
 
 func (server *Server) GetPosts(w http.ResponseWriter, r *http.Request) {
 
+
+	dialOption := grpc.WithTransportCredentials(insecure.NewCredentials())
+		serviceConnection, err := grpc.Dial("localhost:3005", dialOption)
+		if err != nil{
+			panic(err)
+		}
+
+		serviceClient := proto.NewServiceClient(serviceConnection)
+
+		res, err :=serviceClient.Home(context.Background(), &proto.Req{Email: "ezaz@gmail.com", Password: "ezaz@1234"})
+		if err !=nil{
+			panic(err)
+		}
+		fmt.Fprint(w, res.Email, res.Password)
+
 	post := models.Post{}
 
 	posts, err := post.FindAllPosts(server.DB)
@@ -66,6 +100,21 @@ func (server *Server) GetPosts(w http.ResponseWriter, r *http.Request) {
 }
 
 func (server *Server) GetPost(w http.ResponseWriter, r *http.Request) {
+
+
+	dialOption := grpc.WithTransportCredentials(insecure.NewCredentials())
+		serviceConnection, err := grpc.Dial("localhost:3005", dialOption)
+		if err != nil{
+			panic(err)
+		}
+
+		serviceClient := proto.NewServiceClient(serviceConnection)
+
+		res, err :=serviceClient.Home(context.Background(), &proto.Req{Email: "ezaz@gmail.com", Password: "ezaz@1234"})
+		if err !=nil{
+			panic(err)
+		}
+		fmt.Fprint(w, res.Email, res.Password)
 
 	vars := mux.Vars(r)
 	pid, err := strconv.ParseUint(vars["id"], 10, 64)
@@ -84,6 +133,21 @@ func (server *Server) GetPost(w http.ResponseWriter, r *http.Request) {
 }
 
 func (server *Server) UpdatePost(w http.ResponseWriter, r *http.Request) {
+
+
+	dialOption := grpc.WithTransportCredentials(insecure.NewCredentials())
+		serviceConnection, err := grpc.Dial("localhost:3005", dialOption)
+		if err != nil{
+			panic(err)
+		}
+
+		serviceClient := proto.NewServiceClient(serviceConnection)
+
+		res, err :=serviceClient.Home(context.Background(), &proto.Req{Email: "ezaz@gmail.com", Password: "ezaz@1234"})
+		if err !=nil{
+			panic(err)
+		}
+		fmt.Fprint(w, res.Email, res.Password)
 
 	vars := mux.Vars(r)
 
@@ -155,6 +219,20 @@ func (server *Server) UpdatePost(w http.ResponseWriter, r *http.Request) {
 }
 
 func (server *Server) DeletePost(w http.ResponseWriter, r *http.Request) {
+
+	dialOption := grpc.WithTransportCredentials(insecure.NewCredentials())
+		serviceConnection, err := grpc.Dial("localhost:3005", dialOption)
+		if err != nil{
+			panic(err)
+		}
+
+		serviceClient := proto.NewServiceClient(serviceConnection)
+
+		res, err :=serviceClient.Home(context.Background(), &proto.Req{Email: "ezaz@gmail.com", Password: "ezaz@1234"})
+		if err !=nil{
+			panic(err)
+		}
+		fmt.Fprint(w, res.Email, res.Password)
 
 	vars := mux.Vars(r)
 

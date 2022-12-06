@@ -7,7 +7,7 @@ import (
 
 
 	"google.golang.org/grpc"
-	"jwt-grpc-rest/api/proto"
+	"github.com/iamEzaz/jwt-grpc-rest/api/proto"
 )
 
 
@@ -15,7 +15,7 @@ type pingService struct{
 	proto.UnimplementedServiceServer
 } 
 
-func (p *pingService) Login(ctx context.Context, in *proto.Req) (*proto.Res, error){
+func (p *pingService) Home(ctx context.Context, in *proto.Req) (*proto.Res, error){
 	return &proto.Res{
 		Email: in.GetEmail(),
 		Password: in.GetPassword(),
@@ -38,6 +38,6 @@ func main() {
 	if err := grpcServer.Serve(lis); err !=nil {
 		panic (err)
 	}
-	// 	api.Run()
+
 
 }

@@ -8,10 +8,8 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 
-	_ "github.com/jinzhu/gorm/dialects/mysql"    //mysql database driver
-	// _ "github.com/jinzhu/gorm/dialects/postgres" //postgres database driver
-	// _ "github.com/jinzhu/gorm/dialects/sqlite"   // sqlite database driver
-	"jwt-grpc-rest/api/models"
+	_ "github.com/jinzhu/gorm/dialects/mysql" 
+	"github.com/iamEzaz/jwt-grpc-rest/api/models"
 )
 
 type Server struct {
@@ -33,27 +31,7 @@ func (server *Server) Initialize(Dbdriver, DbUser, DbPassword, DbPort, DbHost, D
 			fmt.Printf("We are connected to the %s database", Dbdriver)
 		}
 	}
-	// if Dbdriver == "postgres" {
-	// 	DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", DbHost, DbPort, DbUser, DbName, DbPassword)
-	// 	server.DB, err = gorm.Open(Dbdriver, DBURL)
-	// 	if err != nil {
-	// 		fmt.Printf("Cannot connect to %s database", Dbdriver)
-	// 		log.Fatal("This is the error:", err)
-	// 	} else {
-	// 		fmt.Printf("We are connected to the %s database", Dbdriver)
-	// 	}
-	// }
-	// if Dbdriver == "sqlite3" {
-	// 	//DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", DbHost, DbPort, DbUser, DbName, DbPassword)
-	// 	server.DB, err = gorm.Open(Dbdriver, DbName)
-	// 	if err != nil {
-	// 		fmt.Printf("Cannot connect to %s database\n", Dbdriver)
-	// 		log.Fatal("This is the error:", err)
-	// 	} else {
-	// 		fmt.Printf("We are connected to the %s database\n", Dbdriver)
-	// 	}
-	// 	server.DB.Exec("PRAGMA foreign_keys = ON")
-	// }
+
 
 	server.DB.Debug().AutoMigrate(&models.User{}, &models.Post{}) //database migration
 

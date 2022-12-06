@@ -1,4 +1,4 @@
-module jwt-grpc-rest
+module github.com/iamEzaz/jwt-grpc-rest
 
 go 1.19
 
